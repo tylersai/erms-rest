@@ -18,13 +18,14 @@ public class SubjectDao {
 	public boolean save(Subject sub){
 		try {
 			PreparedStatement stmt=Connector.CON.prepareStatement(
-				"insert into subject values(?,?,?,?,?,?)");
+				"insert into subject(sub_code, sub_name, dept_id, sub_pass, sub_distinction, sub_excellent, sub_max) values(?,?,?,?,?,?,?)");
 			stmt.setString(1, sub.getSub_code());
 			stmt.setString(2, sub.getSub_name());
 			stmt.setString(3, sub.getDept_id());
 			stmt.setInt(4, sub.getSub_pass());
 			stmt.setInt(5, sub.getSub_distinction());
 			stmt.setInt(6, sub.getSub_excellent());
+			stmt.setInt(7, sub.getSub_max());
 			
 			return stmt.executeUpdate() > 0;
 		} catch (SQLException e) {
@@ -61,6 +62,9 @@ public class SubjectDao {
 				sub.setSub_excellent(rs.getInt("sub_excellent"));
 				sub.setSub_name(rs.getString("sub_name"));
 				sub.setSub_pass(rs.getInt("sub_pass"));
+				sub.setSub_max(rs.getInt("sub_max"));
+				sub.setDate_created(rs.getDate("date_created"));
+				sub.setLast_updated(rs.getDate("last_updated"));
 				
 				list.add(sub);
 			}

@@ -74,6 +74,35 @@ public class SubjectDao {
 			return list;
 		}
 	}
+
+	public Subject getSubjectByCode(String sub_code){
+		Subject sub = new Subject();
+		try {
+			PreparedStatement stmt=Connector.CON.prepareStatement(
+				"select * from subject where sub_code=?");
+
+			stmt.setString(1,sub_code);
+
+			ResultSet rs = stmt.executeQuery();
+			if(rs.next()){
+				
+				sub.setDept_id(rs.getString("dept_id"));
+				sub.setSub_code(rs.getString("sub_code"));
+				sub.setSub_distinction(rs.getInt("sub_distinction"));
+				sub.setSub_excellent(rs.getInt("sub_excellent"));
+				sub.setSub_name(rs.getString("sub_name"));
+				sub.setSub_pass(rs.getInt("sub_pass"));
+				sub.setSub_max(rs.getInt("sub_max"));
+				sub.setDate_created(rs.getDate("date_created"));
+				sub.setLast_updated(rs.getDate("last_updated"));
+				return sub;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return sub;
+	}
 	
 	public Map<String, String> getSubjectCodeAndName(){
 		Map<String, String> subCodeAndName = new HashMap<String, String>();

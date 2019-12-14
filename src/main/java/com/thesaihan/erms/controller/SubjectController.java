@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.thesaihan.erms.dao.SubjectDao;
 import com.thesaihan.erms.model.Subject;
@@ -34,6 +35,11 @@ public class SubjectController {
 	@GetMapping("all")
 	public List<Subject> getAll(){
 		return subjectDao.getAllSubjects();
+	}
+
+	@GetMapping("code/{sub_code}")
+	public Subject getSubjectByCode(@PathVariable String sub_code){
+		return subjectDao.getSubjectByCode(sub_code);
 	}
 
 }

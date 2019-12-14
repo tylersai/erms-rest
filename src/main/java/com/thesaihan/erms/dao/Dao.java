@@ -19,7 +19,7 @@ public class Dao {
 			
 			String url = "jdbc:mysql://localhost:3306";
 			
-			Connection con = DriverManager.getConnection(url,"YOUR_DB_USERNAME","YOUR_DB_PASSWORD");
+			Connection con = DriverManager.getConnection(url,"root","root");
 			Statement stm = con.createStatement();
 			
 			//Statement stm = Connector.DB_CON.createStatement();
